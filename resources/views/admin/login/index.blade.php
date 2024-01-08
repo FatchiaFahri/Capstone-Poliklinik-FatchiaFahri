@@ -34,49 +34,52 @@
 </head>
 
 <body>
-    <div class="limiter">
-        <div class="container-login100 bg-white">
-            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+        <div class="limiter">
+            <div class="container-login100 bg-white">
+                <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                    <form action="/admin/login" method="POST" class="login100-form validate-form flex-sb flex-w">
+                        <?php
+                        // PHP logic for CSRF token
+                        $csrfToken = csrf_token();
+                        echo '<input type="hidden" name="_token" value="' . $csrfToken . '">';
+                        ?>
 
-                <form action="/admin/login" method="POST" class="login100-form validate-form flex-sb flex-w">
-                    @csrf
-
-                    <span class="login100-form-title p-b-32">
-                        <a href="/">
-                            <h2><b>Poli</b>klinik</h2>
-                        </a></span>
-                    <span class="login100-form-title p-b-32">Akun Admin</span>
-                    @if (session('loginError'))
-                        <div class="alert alert-danger">
-                            {{ session('loginError') }}
-                        </div>
-                    @endif
-
-                    <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-                        <input type="text" name="username" class="input100" id="username" placeholder="Username"
-                            required>
-                        <span class="focus-input100"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-                        <span class="btn-show-pass">
-                            <i class="fa fa-eye"></i>
+                        <span class="login100-form-title p-b-32">
+                            <a href="/">
+                                <h2><b>Poli</b>klinik</h2>
+                            </a>
                         </span>
-                        <input type="password" name="password" class="input100" id="password" placeholder="Password"
-                            required>
-                        <span class="focus-input100"></span>
-                    </div>
+                        <span class="login100-form-title p-b-32">Akun Admin</span>
 
-                    <div>
-                        <input type="checkbox" name="remember-me" id="remember-me"> Remember Me
-                        <button type="submit" class="login100-form-btn" style="margin-left: 150px;">Sign In</button>
-                    </div>
+                        <?php
+                        // PHP logic for session error
+                        if (session('loginError')) {
+                            echo '<div class="alert alert-danger">' . session('loginError') . '</div>';
+                        }
+                        ?>
 
-                </form>
+                        <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
+                            <input type="text" name="username" class="input100" id="username" placeholder="Username" required>
+                            <span class="focus-input100"></span>
+                        </div>
 
+                        <div class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
+                            <span class="btn-show-pass">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                            <input type="password" name="password" class="input100" id="password" placeholder="Password" required>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="remember-me" id="remember-me"> Remember Me
+                            <button type="submit" class="login100-form-btn" style="margin-left: 150px;">Sign In</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+
 
     <div id="dropDownSelect1"></div>
 

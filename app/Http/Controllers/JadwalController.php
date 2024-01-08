@@ -45,14 +45,18 @@ class JadwalController extends Controller
                 'hari' => 'required',
                 'jam_mulai' => 'required',
                 'jam_selesai' => 'required',
+                'aktif' => 'required',
             ],
             [
                 'id_dokter.required' => 'Dokter tidak boleh kosong',
                 'hari.required' => 'Hari tidak boleh kosong',
                 'jam_mulai.required' => 'Jam Mulai tidak boleh kosong',
                 'jam_selesai.required' => 'Jam Selesai tidak boleh kosong',
+                'aktif.required' => 'Aktif tidak boleh kosong',
             ]
         );
+
+        $aktifValue = ($request->aktif == 'aktif') ? 'Y' : 'N';
 
         $dokter = Dokter::find($request->id_dokter);
         $jadwal = Jadwal::create([
@@ -60,6 +64,7 @@ class JadwalController extends Controller
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
+            'aktif' => $aktifValue, //mengubah nilai yang sudah ada
         ]);
         $jadwal->dokter()->associate($dokter);
         $jadwal->save();
@@ -105,14 +110,18 @@ class JadwalController extends Controller
                 'hari' => 'required',
                 'jam_mulai' => 'required',
                 'jam_selesai' => 'required',
+                'aktif' => 'required',
             ],
             [
                 'id_dokter.required' => 'Dokter tidak boleh kosong',
                 'hari.required' => 'Hari tidak boleh kosong',
                 'jam_mulai.required' => 'Jam Mulai tidak boleh kosong',
                 'jam_selesai.required' => 'Jam Selesai tidak boleh kosong',
+                'aktif.required' => 'Aktif tidak boleh kosong',
             ]
         );
+
+        $aktifValue = ($request->aktif == 'aktif') ? 'Y' : 'N';
 
         $dokter = Dokter::find($request->id_dokter);
         $jadwal = Jadwal::find($id);
@@ -121,6 +130,7 @@ class JadwalController extends Controller
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
+            'aktif' => $aktifValue, //mengubah nilai yang sudah ada
         ]);
 
         return redirect()->route('jadwalperiksa')->with('success', 'Jadwal berhasil diubah');

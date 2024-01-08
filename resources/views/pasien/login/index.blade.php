@@ -38,37 +38,37 @@
         <div class="container-login100 bg-white">
             <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 
-                <form action="/pasien/login" method="POST" class="login100-form validate-form flex-sb flex-w">
-                    @csrf
+                        <form action="{{ url('/pasien/login') }}" method="POST" class="login100-form validate-form flex-sb flex-w">
+                @csrf
 
-                    <span class="login100-form-title p-b-32">
-                        <a href="/">
-                            <h2><b>Poli</b>klinik</h2>
-                        </a>
-                    </span>
-                    <span class="login100-form-title p-b-32">Akun Pasien</span>
-                    @if (session('loginError'))
-                        <div class="alert alert-danger">
-                            {{ session('loginError') }}
-                        </div>
-                    @endif
-                    <div class="wrap-input100 validate-input m-b-36" data-validate = "No_ktp is required">
-                        <input type="text" name="no_ktp" class="input100" id="no_ktp" placeholder="No ktp"
-                            value="{{ old('no_ktp') }}" required>
-                        <span class="focus-input100"></span>
+                <span class="login100-form-title p-b-32">
+                    <a href="/">
+                        <h2><b>Poli</b>klinik</h2>
+                    </a>
+                </span>
+                
+                <span class="login100-form-title p-b-32">Akun Pasien</span>
+
+                @if (session('loginError'))
+                    <div class="alert alert-danger">
+                        {{ session('loginError') }}
                     </div>
+                @endif
 
-                    <div>
-                        <button type="submit" class="login100-form-btn" style="margin-left: 150px;">Masuk</button>
-                    </div>
-                </form>
-
-                <div style="margin-top: 40px;">
-                    <p>Belum punya akun? <a href="{{ route('pasien.register') }}"><b>Daftar</b></a></p>
+                <div class="wrap-input100 validate-input m-b-36" data-validate="No_ktp is required">
+                    <input type="text" name="no_ktp" class="input100" id="no_ktp" placeholder="No ktp" value="{{ old('no_ktp') }}" required>
+                    <span class="focus-input100"></span>
                 </div>
+
+                <div>
+                    <button type="submit" class="login100-form-btn" style="margin-left: 150px;">Masuk</button>
+                </div>
+            </form>
+
+            <div style="margin-top: 40px;">
+                <p>Belum punya akun? <a href="{{ route('pasien.register') }}"><b>Daftar</b></a></p>
             </div>
-        </div>
-    </div>
+
 
     <div id="dropDownSelect1"></div>
 

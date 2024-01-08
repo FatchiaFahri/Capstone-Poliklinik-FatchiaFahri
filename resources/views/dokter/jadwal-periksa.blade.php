@@ -31,6 +31,7 @@
                                 <th>Hari</th>
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -42,14 +43,11 @@
                                     <td>{{ $jadwal->hari }}</td>
                                     <td>{{ $jadwal->jam_mulai }}</td>
                                     <td>{{ $jadwal->jam_selesai }}</td>
+                                    <td>{{ $jadwal->aktif == 'Y' ? 'Aktif' : 'Non Aktif' }}</td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal"
                                             data-target="#editModal{{ $jadwal->id }}">
                                             <i class="fas fa-edit"></i> Edit
-                                        </button>
-                                        <button class="btn btn-danger" data-toggle="modal"
-                                            data-target="#hapusModal{{ $jadwal->id }}">
-                                            <i class="fas fa-trash"></i> Hapus
                                         </button>
                                     </td>
                                 </tr>
@@ -97,6 +95,13 @@
                                             <label for="jam_selesai">Jam Selesai</label>
                                             <input type="time" class="form-control" id="jam_selesai" name="jam_selesai"
                                                 required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aktif">Status</label>
+                                            <select class="form-control" id="aktif" name="aktif" required>
+                                                <option value="aktif" {{ old('aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                                <option value="non aktif" {{ old('aktif') == 'non aktif' ? 'selected' : '' }}>Non Aktif</option>
+                                            </select>
                                         </div>
                                 </div>
                                 <div class="modal-footer">
@@ -160,6 +165,13 @@
                                                 <input type="time" class="form-control" id="jam_selesai"
                                                     name="jam_selesai" value="{{ $jadwal->jam_selesai }}" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="aktif">Status</label>
+                                                <select class="form-control" id="aktif" name="aktif" required>
+                                                    <option value="aktif" {{ old('aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                                    <option value="non aktif" {{ old('aktif') == 'non aktif' ? 'selected' : '' }}>Non Aktif</option>
+                                                </select>
+                                            </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -170,32 +182,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Modal Hapus -->
-                        <div class="modal fade" id="hapusModal{{ $jadwal->id }}" tabindex="-1" role="dialog"
-                            aria-labelledby="hapusModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Apakah Anda yakin akan menghapus data ini?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="{{ route('jadwalperiksa.destroy', ['id' => $jadwal->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
-                                        </form>
-                                    </div>
+                            </div>
                                 </div>
                             </div>
                         </div>

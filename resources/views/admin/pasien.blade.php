@@ -65,47 +65,52 @@
                     </form>
 
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Pasien</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>No. KTP</th>
-                                        <th>No. HP</th>
-                                        <th>No. RM</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pasiens as $pasien)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pasien->nama }}</td>
-                                            <td>{{ $pasien->alamat }}</td>
-                                            <td>{{ $pasien->no_ktp }}</td>
-                                            <td>{{ $pasien->no_hp }}</td>
-                                            <td>{{ $pasien->no_rm }}</td>
-                                            <td>
-                                                <button data-toggle="modal" data-target="#editModal{{ $pasien->id }}"
-                                                    class="btn btn-success">Ubah</button>
-                                                <button class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#hapusModal{{ $pasien->id }}">
-                                                    Hapus
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
+    <div class="card-header">
+        <h3 class="card-title">Pasien</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>No. KTP</th>
+                        <th>No. HP</th>
+                        <th>No. RM</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($pasiens as $pasien)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $pasien->nama }}</td>
+                            <td>{{ $pasien->alamat }}</td>
+                            <td>{{ $pasien->no_ktp }}</td>
+                            <td>{{ $pasien->no_hp }}</td>
+                            <td>{{ $pasien->no_rm }}</td>
+                            <td>
+                                <button data-toggle="modal" data-target="#editModal{{ $pasien->id }}"
+                                    class="btn btn-success">Ubah</button>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#hapusModal{{ $pasien->id }}">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">Tidak ada data pasien.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
                     <!-- /.card -->
 
                 </div><!-- /.col -->

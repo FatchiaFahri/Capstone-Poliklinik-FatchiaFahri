@@ -10,45 +10,53 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Daftar Memeriksa Pasien</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
+    <div class="card-header">
+        <h3 class="card-title">Daftar Memeriksa Pasien</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>No. Urut</th>
+                    <th>Nama Pasien</th>
+                    <th>Keluhan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+                    <tbody>
+                        @forelse ($daftarPolis as $daftarPoli)
                             <tr>
-                                <th>No. Urut</th>
-                                <th>Nama Pasien</th>
-                                <th>Keluhan</th>
-                                <th>Aksi</th>
+                                <td>{{ $daftarPoli->no_antrian }}</td>
+                                <td>{{ $daftarPoli->pasien->nama }}</td>
+                                <td>{{ $daftarPoli->keluhan }}</td>
+                                <td>
+                                    <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#editModal{{ $daftarPoli->id }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <a href="{{ route('editperiksa', $daftarPoli->id) }}" class="btn btn-warning">
+                                        <i class="fas fa-stethoscope"></i> Periksa
+                                    </a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($daftarPolis as $daftarPoli)
-                                <tr>
-                                    <td>{{ $daftarPoli->no_antrian }}</td>
-                                    <td>{{ $daftarPoli->pasien->nama }}</td>
-                                    <td>{{ $daftarPoli->keluhan }}</td>
-                                    <td>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editModal{{ $daftarPoli->id }}">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </button>
-                                        <a href="{{ route('editperiksa', $daftarPoli->id) }}" class="btn btn-warning">
-                                            <i class="fas fa-stethoscope"></i> Periksa
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @foreach ($daftarPolis as $daftarPoli)
+                        @empty
+                            <tr>
+                                <td colspan="4">Tidak ada data memeriksa pasien.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        @foreach ($daftarPolis as $daftarPoli)
+
                         <!-- Modal Edit -->
                         <div class="modal fade" id="editModal{{ $daftarPoli->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="editModalLabel" aria-hidden="true">

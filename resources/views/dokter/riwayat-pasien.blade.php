@@ -10,42 +10,50 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Riwayat Pasien</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
+    <div class="card-header">
+        <h3 class="card-title">Riwayat Pasien</h3>
+    </div>
+    <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Nama Pasien</th>
+                            <th>Alamat</th>
+                            <th>No. KTP</th>
+                            <th>No. Telepon</th>
+                            <th>No. RM</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($detailPeriksas->groupBy('id_periksa') as $idPeriksa => $groupedDetailPeriksas)
                             <tr>
-                                <th>No.</th>
-                                <th>Nama Pasien</th>
-                                <th>Alamat</th>
-                                <th>No. KTP</th>
-                                <th>No. Telepon</th>
-                                <th>No. RM</th>
-                                <th>Aksi</th>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->nama ?? '-' }}</td>
+                                <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->alamat ?? '-' }}</td>
+                                <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_ktp ?? '-' }}</td>
+                                <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_hp ?? '-' }}</td>
+                                <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_rm ?? '-' }}</td>
+                                <td>
+                                    <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#editModal{{ $idPeriksa }}">
+                                        <i class="fas fa-eye"></i> Detail Riwayat Periksa
+                                    </button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($detailPeriksas->groupBy('id_periksa') as $idPeriksa => $groupedDetailPeriksas)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->nama }}</td>
-                                    <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->alamat }}</td>
-                                    <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_ktp }}</td>
-                                    <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_hp }}</td>
-                                    <td>{{ $groupedDetailPeriksas[0]->periksa->daftarPoli->pasien->no_rm }}</td>
-                                    <td>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editModal{{ $idPeriksa }}">
-                                            <i class="fas fa-eye"></i> Detail Riwayat Periksa
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                        @empty
+                            <tr>
+                                <td colspan="7">Tidak ada riwayat periksa pasien.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+
                     @foreach ($detailPeriksas->groupBy('id_periksa') as $idPeriksa => $groupedDetailPeriksas)
                         <!-- Modal Edit -->
                         <div class="modal fade" id="editModal{{ $idPeriksa }}" tabindex="-1" role="dialog"

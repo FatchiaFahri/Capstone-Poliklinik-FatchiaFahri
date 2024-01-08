@@ -43,10 +43,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-                    <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
                     <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
-
-
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -55,75 +52,37 @@
     </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-        <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-9 text-center">
-                    <h1>Sistem Temu Janji Pasien - Dokter</h1>
-                    <h2>Bimbingan Karir 2023 Bidang Web</h2>
-                </div>
-            </div>
-            <div class="row icon-boxes">
-                <div class="col-md-5 col-lg-6 d-flex align-items-center mb-5 mb-lg-0" data-aos="zoom-in"
-                    data-aos-delay="200">
-                    <div class="icon-box">
-                        <div class="icon"><i class="ri-user-line"></i></div>
-                        <h4 class="title"><a href="{{ route('pasien.login') }}">Login Sebagai Pasien</a></h4>
-                        <p class="description">Apabila Anda adalah seorang Pasien silahkan Login terlebih dahulu untuk
-                            melakukan pendaftaran sebagai Pasien!</p>
+            <section id="hero" class="d-flex align-items-center">
+            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-9 text-center">
+                        <h1>Sistem Temu Janji Pasien - Dokter</h1>
+                        <h2>Bimbingan Karir 2023 Bidang Web</h2>
                     </div>
                 </div>
-                <div class="col-md-5 col-lg-6 d-flex align-items-center mb-5 mb-lg-0" data-aos="zoom-in"
-                    data-aos-delay="300">
-                    <div class="icon-box">
-                        <div class="icon"><i class="ri-user-line"></i></div>
-                        <h4 class="title"><a href="{{ route('dokter.login') }}">Login Sebagai Dokter</a></h4>
-                        <p class="description">Apabila Anda adalah seorang Dokter silahkan Login terlebih dahulu untuk
-                            memulai melayani Pasien!</p>
-                    </div>
+                <div class="row icon-boxes">
+                    <?php
+                    $userTypes = [
+                        ['route' => 'pasien.login', 'title' => 'Login Sebagai Pasien', 'description' => 'Apabila Anda adalah seorang Pasien silahkan Login terlebih dahulu untuk melakukan pendaftaran sebagai Pasien!'],
+                        ['route' => 'dokter.login', 'title' => 'Login Sebagai Dokter', 'description' => 'Apabila Anda adalah seorang Dokter silahkan Login terlebih dahulu untuk memulai melayani Pasien!'],
+                    ];
+
+                    foreach ($userTypes as $userType) {
+                        echo '<div class="col-md-5 col-lg-6 d-flex align-items-center mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">';
+                        echo '<div class="icon-box">';
+                        echo '<div class="icon"><i class="ri-user-line"></i></div>';
+                        echo '<h4 class="title"><a href="' . route($userType['route']) . '">' . $userType['title'] . '</a></h4>';
+                        echo '<p class="description">' . $userType['description'] . '</p>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
-    </section><!-- End Hero -->
+        </section>
+<!-- End Hero -->
 
     <main id="main">
-        <!-- ======= About Section ======= -->
-        <!-- <section id="about" class="about">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>About</h2>
-                    <p>Sistem Temu Janji Pasien - Dokter</p>
-                </div>
-
-                <div class="row content">
-
-                    <div class="col-lg-6 pt-4 pt-lg-0">
-                        <p>
-                            Sistem Temu Janji Pasien - Dokter merupakan sebuah solusi inovatif dalam bidang pelayanan
-                            kesehatan yang menghubungkan pasien dan dokter secara efisien. Dengan menggunakan teknologi,
-                            sistem ini dirancang untuk memberikan pengalaman yang lebih baik dalam mencari, membuat, dan
-                            mengelola janji temu antara pasien dan dokter. Berikut adalah beberapa kata-kata yang dapat
-                            digunakan untuk mendeskripsikan Sistem Temu Janji Pasien - Dokter
-                        </p>
-                        <a href="#" class="btn-learn-more">Pelajari Lebih Lanjut</a>
-                    </div>
-                    <div class="col-lg-6">
-                        <p>
-                            Dalam memberikan layanan temu janji pasien-dokter, kami bangga dengan sejumlah keunggulan
-                            yang menjadi ciri khas kami. Berikut adalah beberapa alasan mengapa Anda dapat mempercayakan
-                            temu janji dan bimbingan karir bidang web kepada kami:
-                        </p>
-                        <ul>
-                            <li><i class="ri-check-double-line"></i> Pelayanan Efisien dan Cepat</li>
-                            <li><i class="ri-check-double-line"></i> Pengalaman Pengguna yang Ramah</li>
-                            <li><i class="ri-check-double-line"></i> Akses Mudah dan Transparan</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>End About Section -->
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials">
             <div class="container" data-aos="fade-up">

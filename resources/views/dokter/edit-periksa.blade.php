@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <script>
+        <script>
         let selectedObats = [];
 
         function addObatToList() {
@@ -155,4 +155,5 @@
             $('#totalHarga').text(totalHarga);
         }
     </script>
+
 @endsection

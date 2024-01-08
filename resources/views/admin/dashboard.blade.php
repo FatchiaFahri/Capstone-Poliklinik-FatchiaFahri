@@ -2,77 +2,34 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content">
-        <div class="container-fluid">
-            <br>
-            <h2>Dashboard Admin</h2>
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $dokters }}</h3>
+    <div class="container-fluid">
+        <br>
+        <h2>Dashboard Admin</h2>
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <?php
+            $statBoxes = [
+                ['class' => 'bg-info', 'icon' => 'ion ion-android-person', 'count' => $dokters, 'text' => 'Dokter', 'route' => route('dokter')],
+                ['class' => 'bg-success', 'icon' => 'ion ion-android-person', 'count' => $pasiens, 'text' => 'Pasien', 'route' => route('pasien')],
+                ['class' => 'bg-warning', 'icon' => 'ion ion-clipboard', 'count' => $polis, 'text' => 'Poli', 'route' => route('poli')],
+                ['class' => 'bg-danger', 'icon' => 'ion ion-clipboard', 'count' => $obats, 'text' => 'Obat', 'route' => route('obat')],
+            ];
 
-                            <p>Dokter</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-android-person"></i>
-                        </div>
-                        <a href="{{ route('dokter') }}" class="small-box-footer">More info <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>{{ $pasiens }}</h3>
-
-                            <p>Pasien</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-android-person"></i>
-
-
-                        </div>
-                        <a href="{{ route('pasien') }}" class="small-box-footer">More info <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>{{ $polis }}</h3>
-
-                            <p>Poli</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-clipboard"></i>
-                        </div>
-                        <a href="{{ route('poli') }}" class="small-box-footer">More info <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>{{ $obats }}</h3>
-
-                            <p>Obat</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-clipboard"></i>
-                        </div>
-                        <a href="{{ route('obat') }}" class="small-box-footer">More info <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            foreach ($statBoxes as $box) {
+                echo '<div class="col-lg-3 col-6">';
+                echo '<div class="small-box ' . $box['class'] . '">';
+                echo '<div class="inner">';
+                echo '<h3>' . $box['count'] . '</h3>';
+                echo '<p>' . $box['text'] . '</p>';
+                echo '</div>';
+                echo '<div class="icon"><i class="' . $box['icon'] . '"></i></div>';
+                echo '<a href="' . $box['route'] . '" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>';
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
         </div>
-    </section>
+    </div>
+</section>
+
 @endsection
